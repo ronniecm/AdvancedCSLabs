@@ -6,4 +6,5 @@ public interface Bag {
 	int numItems();
 	Object grab();
 	Object[] toArray();
+	void printBag();
 }

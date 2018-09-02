@@ -23,13 +23,13 @@ public class ArrayBag implements Bag
 	@Override
 	public boolean remove(Object item) 
 	{
-		numItems--;
 		int loc = -1;
-		
-		for(int i = 0; i < items.length; i++)
+		int i = 0;
+		while(loc == -1 || i != items.length)
 		{
 			if(items[i].equals(item))
 				loc = i;
+			i++;
 		}
 		
 		if(loc != items.length - 1)
@@ -42,9 +42,11 @@ public class ArrayBag implements Bag
 			}
 		}
 		
+		numItems--;
 		resizeArray(numItems);
 		return true;
 	}
+	
 
 	@Override
 	public int numItems()
@@ -66,11 +68,17 @@ public class ArrayBag implements Bag
 		return items;
 	}
 	
+	public void printBag()
+	{
+		for(Object item : items)
+			System.out.print(item + " ");
+	}
+	
 	private void resizeArray(int size)
 	{
 		Object[] resizedArray = new Object[size];
 		//items = new Object[size];
-		if(numItems < items.length)
+		if(size < items.length)
 		{
 			for(int i = 0; i < resizedArray.length; i++)
 			{	
@@ -90,13 +98,29 @@ public class ArrayBag implements Bag
 	
 	public static void main(String[] args)
 	{
-		String[] words = {"hi", "there", "hello", "bye"};
-		Bag ofWords = new ArrayBag(words);
-		ofWords.remove("hello");
-		ofWords.add("ronnie");
-		ofWords.remove("bye");
-		for(Object word : ofWords.toArray())
-			System.out.println(word);
-			
+		Polynomial p = new ArrayBasedPoly(5, 2);
+		Polynomial p1 = new ArrayBasedPoly(7, 4);
+		Polynomial p2 = new ArrayBasedPoly(3, 1);
+		
+		Polynomial[] polys = {p, p1, p2};
+		Bag ofPolys = new ArrayBag(polys);
+		
+		ofPolys.printBag();
+		
+		ofPolys.add(new ArrayBasedPoly(2, 5));
+		
+		System.out.println();
+		
+		ofPolys.printBag();
+		
+		System.out.println();
+		
+		ofPolys.remove(ofPolys.toArray()[1]);
+		
+		ofPolys.printBag();
+		
+		System.out.println("\nNumber of Items in the Bag: " + ofPolys.numItems());
+		System.out.println("Grabbing a random item from the bag: " + ofPolys.grab());
+		
 	}
 }
