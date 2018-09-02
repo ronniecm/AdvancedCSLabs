@@ -5,7 +5,6 @@ public class RationalNumDriver {
 	{
 		RationalNum r1 = new RationalNum(52, 36); 
 		System.out.println("r1 = " + r1); 
-		System.out.println("r1 simplified = " + RationalNum.simplify(r1));
 		RationalNum r2 = new RationalNum(7, 39); 
 		System.out.println("r2 = " + r2 + "\n");
 		r2.setDenom(0);

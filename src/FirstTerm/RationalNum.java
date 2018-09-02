@@ -7,6 +7,7 @@ public class RationalNum {
 	{
 		numerator = numer;
 		denominator = denom;
+		simplify();
 	}
 	
 	public RationalNum(RationalNum copy)
@@ -18,23 +19,25 @@ public class RationalNum {
 	public void setDenom(int denom)
 	{
 		if(denom == 0)
-			System.out.println("Cannot set denominator to 0");;
-		
+			System.out.println("Cannot set denominator to 0");
+		else
 			this.denominator = denom;
+		
+		simplify();
 	}
 	
-	public static RationalNum simplify(RationalNum param)
+	private void simplify()
 	{
-		int gcd = findGCD(param.numerator, param.denominator);
-		return new RationalNum(param.numerator/gcd, param.denominator/gcd);
+		int gcd = findGCD(numerator, denominator);
+		numerator /= gcd;
+		denominator /= gcd;
 	}
 	
 	public RationalNum add(RationalNum other)
 	{
 		int lcm = findLCM(this.denominator, other.denominator);
 		int newNumerator = (this.numerator * (lcm / this.denominator)) + (other.numerator * (lcm / other.denominator));
-	
-		return simplify(new RationalNum(newNumerator, lcm));
+		return new RationalNum(newNumerator, lcm);	
 	}
 	
 	public RationalNum subtract(RationalNum other)
@@ -42,25 +45,22 @@ public class RationalNum {
 		int lcm = findLCM(this.denominator, other.denominator);
 		int newNumerator = (this.numerator * (lcm / this.denominator)) - (other.numerator * (lcm / other.denominator));
 	
-		return simplify(new RationalNum(newNumerator, lcm));
+		return new RationalNum(newNumerator, lcm);
 	}
 	
 	public RationalNum multiply(RationalNum other)
 	{
-		return simplify(new RationalNum(this.numerator * other.numerator, this.denominator * other.denominator));
+		return new RationalNum(this.numerator * other.numerator, this.denominator * other.denominator);
 	}
 	
 	public RationalNum divide(RationalNum other)
 	{
-		return simplify(new RationalNum(this.numerator * other.denominator, this.denominator * other.numerator));
+		return new RationalNum(this.numerator * other.denominator, this.denominator * other.numerator);
 	}
 	
 	public boolean equals(RationalNum other)
 	{
-		RationalNum r1 = simplify(this);
-		RationalNum r2 = simplify(other);
-		
-		if(r1.numerator == r2.numerator && r1.denominator == r2.denominator)
+		if(this.numerator == other.numerator && this.denominator == other.denominator)
 			return true;
 		else
 			return false;
@@ -71,7 +71,7 @@ public class RationalNum {
 		return this.numerator + "/" + this.denominator;	
 	}
 	
-	public static int findGCD(int num1, int num2)
+	private int findGCD(int num1, int num2)
 	{
 		while(num2 > 0)
 		{
@@ -83,7 +83,7 @@ public class RationalNum {
 		return num1;
 	}
 	
-	public static int findLCM(int num1, int num2)
+	private int findLCM(int num1, int num2)
 	{
 		return (num1 * num2) / findGCD(num1, num2);
 	}
