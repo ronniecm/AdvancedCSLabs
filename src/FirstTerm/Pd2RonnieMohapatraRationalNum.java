@@ -9,7 +9,7 @@
  */
 package FirstTerm;
 
-public class RationalNum {
+public class Pd2RonnieMohapatraRationalNum {
 	private int numerator, denominator;
 	
 	/*
@@ -17,7 +17,7 @@ public class RationalNum {
 	 * post-condition: a simplified rational number has constructed
 	 * 					numerator = numer and denominator = denom
 	 */
-	public RationalNum(int numer, int denom)
+	public Pd2RonnieMohapatraRationalNum(int numer, int denom)
 	{
 		numerator = numer;
 		denominator = denom;
@@ -37,7 +37,7 @@ public class RationalNum {
 	 * pre-condition: none
 	 * post-condition: instance variables of this RationalNum equal the instance variables of other
 	 */
-	public RationalNum(RationalNum copy)
+	public Pd2RonnieMohapatraRationalNum(Pd2RonnieMohapatraRationalNum copy)
 	{
 		numerator = copy.numerator;
 		denominator = copy.denominator;
@@ -72,11 +72,11 @@ public class RationalNum {
 	 * pre-condition: none
 	 * post-condition: new RationalNum of the sum between this and other returned
 	 */
-	public RationalNum add(RationalNum other)
+	public Pd2RonnieMohapatraRationalNum add(Pd2RonnieMohapatraRationalNum other)
 	{
 		int lcm = findLCM(this.denominator, other.denominator); 
 		int newNumerator = (this.numerator * (lcm / this.denominator)) + (other.numerator * (lcm / other.denominator));
-		return new RationalNum(newNumerator, lcm);	
+		return new Pd2RonnieMohapatraRationalNum(newNumerator, lcm);	
 	}
 	
 	/*
@@ -84,30 +84,30 @@ public class RationalNum {
 	 * post-condition: new RationalNum of the difference between this and other returned
 	 */
 	
-	public RationalNum subtract(RationalNum other)
+	public Pd2RonnieMohapatraRationalNum subtract(Pd2RonnieMohapatraRationalNum other)
 	{
 		int lcm = findLCM(this.denominator, other.denominator);
 		int newNumerator = (this.numerator * (lcm / this.denominator)) - (other.numerator * (lcm / other.denominator));
 	
-		return new RationalNum(newNumerator, lcm);
+		return new Pd2RonnieMohapatraRationalNum(newNumerator, lcm);
 	}
 	
 	/*
 	 * pre-condition: none
 	 * post-condition: new RationalNum of the product between this and other returned
 	 */
-	public RationalNum multiply(RationalNum other)
+	public Pd2RonnieMohapatraRationalNum multiply(Pd2RonnieMohapatraRationalNum other)
 	{
-		return new RationalNum(this.numerator * other.numerator, this.denominator * other.denominator);
+		return new Pd2RonnieMohapatraRationalNum(this.numerator * other.numerator, this.denominator * other.denominator);
 	}
 	
 	/*
 	 * pre-condition: none
 	 * post-condition: new RationalNum of the quotient between this and other returned
 	 */
-	public RationalNum divide(RationalNum other)
+	public Pd2RonnieMohapatraRationalNum divide(Pd2RonnieMohapatraRationalNum other)
 	{
-		return new RationalNum(this.numerator * other.denominator, this.denominator * other.numerator);
+		return new Pd2RonnieMohapatraRationalNum(this.numerator * other.denominator, this.denominator * other.numerator);
 	}
 	
 	/*
@@ -116,7 +116,7 @@ public class RationalNum {
 	 */
 	public boolean equals(Object other)
 	{
-		RationalNum n = (RationalNum)other;
+		Pd2RonnieMohapatraRationalNum n = (Pd2RonnieMohapatraRationalNum)other;
 		if(this.numerator == n.getNumerator() && this.denominator == n.getDenominator()) //compares numerator and denominator
 			return true;
 		else
@@ -150,13 +150,13 @@ public class RationalNum {
 	private int findLCM(int num1, int num2)
 	{
 		return num1 * num2 / GCD(num1, num2); //formula for LCM: LCM = num1 * num2 / GCD(num1, num2)
-	}
+	} 
 	
 	public static void main(String [] args) 
 	{
-		RationalNum r1 = new RationalNum(52, 36); 
+		Pd2RonnieMohapatraRationalNum r1 = new Pd2RonnieMohapatraRationalNum(52, 36); 
 		System.out.println("r1 = " + r1); 
-		RationalNum r2 = new RationalNum(7, 39); 
+		Pd2RonnieMohapatraRationalNum r2 = new Pd2RonnieMohapatraRationalNum(7, 39); 
 		System.out.println("r2 = " + r2 + "\n");
 		r2.setDenom(0);
 		System.out.println("r2 = " + r2 + "\n"); 

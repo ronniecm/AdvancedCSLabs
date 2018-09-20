@@ -9,14 +9,14 @@
  */
 package FirstTerm;
 
-public class ArrayBasedPoly implements Polynomial {
+public class Pd2RonnieMohapatraArrayBasedPoly implements Pd2RonnieMohapatraPolynomial {
 	private double[] c;
 	
 	/*
 	 * pre-condition: none
 	 * post-condition: coefficients is copied to c
 	 */
-	public ArrayBasedPoly(double[] coefficients)
+	public Pd2RonnieMohapatraArrayBasedPoly(double[] coefficients)
 	{
 		c = coefficients;
 	}
@@ -25,7 +25,7 @@ public class ArrayBasedPoly implements Polynomial {
 	 * pre-condition: exponent > 0
 	 * post-condition: c is filled with zeros excpet for the index-based degree
 	 */
-	public ArrayBasedPoly(double coefficient, int exponent)
+	public Pd2RonnieMohapatraArrayBasedPoly(double coefficient, int exponent)
 	{
 		c = new double[exponent + 1];
 		for(int i = 0; i < c.length; i++) {
@@ -40,7 +40,7 @@ public class ArrayBasedPoly implements Polynomial {
 	 * pre-condition: copy is of type Polynomial
 	 * post-condition: attributes of copy are also attributes of this
 	 */
-	public ArrayBasedPoly(Polynomial copy)
+	public Pd2RonnieMohapatraArrayBasedPoly(Pd2RonnieMohapatraPolynomial copy)
 	{
 		c = new double[copy.getDegree() + 1];
 		for(int i = 0; i < c.length; i++)
@@ -83,7 +83,7 @@ public class ArrayBasedPoly implements Polynomial {
 	 * pre-condition: other is of type Polynomial
 	 * post-condition: new Polynomial is returned which represents the sum of this and other
 	 */
-	public Polynomial add(Polynomial other)
+	public Pd2RonnieMohapatraPolynomial add(Pd2RonnieMohapatraPolynomial other)
 	{
 		double[] c2;
 		if(this.getDegree() + 1 > other.getDegree() + 1)
@@ -116,14 +116,14 @@ public class ArrayBasedPoly implements Polynomial {
 			}
 		}
 		
-		return new ArrayBasedPoly(c2);
+		return new Pd2RonnieMohapatraArrayBasedPoly(c2);
 	}
 	
 	/*
 	 * pre-condition: other is of type Polynomial
 	 * post-condition: new Polynomial is returned which represents the difference between this and other
 	 */
-	public Polynomial subtract(Polynomial other)
+	public Pd2RonnieMohapatraPolynomial subtract(Pd2RonnieMohapatraPolynomial other)
 	{
 		double[] c2;
 		int index = 0;
@@ -154,14 +154,14 @@ public class ArrayBasedPoly implements Polynomial {
 			}
 		}
 		
-		return new ArrayBasedPoly(c2);
+		return new Pd2RonnieMohapatraArrayBasedPoly(c2);
 	}
 	
 	/*
 	 * pre-condition: none
 	 * post-condition: new Polynomial returned which represents the derivative of this
 	 */
-	public Polynomial findDerivative()
+	public Pd2RonnieMohapatraPolynomial findDerivative()
 	{
 		double[] c2 = new double[c.length - 1];
 		
@@ -169,7 +169,16 @@ public class ArrayBasedPoly implements Polynomial {
 			c2[i] = (i+1) * c[i+1];
 		}
 		
-		return new ArrayBasedPoly(c2);
+		return new Pd2RonnieMohapatraArrayBasedPoly(c2);
+	}
+	
+	public Pd2RonnieMohapatraPolynomial times(double factor)
+	{
+		double[] c1 = new double[c.length];
+		for(int i = 0; i < c1.length; i++)
+			c1[i] = factor * c[i];
+		
+		return new Pd2RonnieMohapatraArrayBasedPoly(c1);
 	}
 	
 	/*
@@ -202,26 +211,26 @@ public class ArrayBasedPoly implements Polynomial {
 	      double [] c = {1, 0, 3, 4};
 	      double [] c1 = {-2, -5};
 	   
-	      Polynomial p1 = new ArrayBasedPoly(c);  // 4x^3 + 3x^2 + 1
+	      Pd2RonnieMohapatraPolynomial p1 = new Pd2RonnieMohapatraArrayBasedPoly(c);  // 4x^3 + 3x^2 + 1
 	      System.out.println("p1(x) = " + p1);
 	   
-	      Polynomial p2 = new ArrayBasedPoly(c1);   // - 5x – 2
+	      Pd2RonnieMohapatraPolynomial p2 = new Pd2RonnieMohapatraArrayBasedPoly(c1);   // - 5x – 2
 	      System.out.println("p2(x) = " + p2);                 // p2(x) = - 5x^1 – 2
 	   
-	      Polynomial p3 = new ArrayBasedPoly(-4, 1);  // coeff = -4, exp = 1
+	      Pd2RonnieMohapatraPolynomial p3 = new Pd2RonnieMohapatraArrayBasedPoly(-4, 1);  // coeff = -4, exp = 1
 	      System.out.println("p3(x) = " + p3);
 	   
-	      Polynomial p = p1.add(p2).add(p2);   // 4x^3 + 3x^2 - 10x – 3
+	      Pd2RonnieMohapatraPolynomial p = p1.add(p2).add(p2);   // 4x^3 + 3x^2 - 10x – 3
 	      System.out.println("p(x) = " + p);       // p(x) = 4x^3 + 3x^2 - 10x^1 – 3
 	      
-	      Polynomial p4   = p.subtract(p3);   // 4x^3 + 3x^2 - 6x^1 – 3   <====
+	      Pd2RonnieMohapatraPolynomial p4   = p.subtract(p3);   // 4x^3 + 3x^2 - 6x^1 – 3   <====
 	      System.out.println("p4(x) = " + p4);
 	   
 	   
-	      Polynomial p5   = p4.findDerivative();   // 12x^2 + 6x^1 - 6   <====
+	      Pd2RonnieMohapatraPolynomial p5   = p4.findDerivative();   // 12x^2 + 6x^1 - 6   <====
 	      System.out.println("p5(x) = " + p5);
 	      
-	      Polynomial clone = new ArrayBasedPoly(p5);
+	      Pd2RonnieMohapatraPolynomial clone = new Pd2RonnieMohapatraArrayBasedPoly(p5);
 	      System.out.println("clone(x) = " + clone);
 	   
 	      System.out.println ("p(5) = " + p5.evaluate(0));

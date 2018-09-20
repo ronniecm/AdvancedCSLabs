@@ -3,9 +3,9 @@ package FirstTerm;
 public class RationalNumDriver {
 	public static void main(String [] args) 
 	{
-		RationalNum r1 = new RationalNum(52, 36); 
+		Pd2RonnieMohapatraRationalNum r1 = new Pd2RonnieMohapatraRationalNum(52, 36); 
 		System.out.println("r1 = " + r1); 
-		RationalNum r2 = new RationalNum(7, 39); 
+		Pd2RonnieMohapatraRationalNum r2 = new Pd2RonnieMohapatraRationalNum(7, 39); 
 		System.out.println("r2 = " + r2 + "\n");
 		r2.setDenom(0);
 		System.out.println("r2 = " + r2 + "\n"); 

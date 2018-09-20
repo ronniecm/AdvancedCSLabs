@@ -98,16 +98,16 @@ public class ArrayBag implements Bag
 	
 	public static void main(String[] args)
 	{
-		Polynomial p = new ArrayBasedPoly(5, 2);
-		Polynomial p1 = new ArrayBasedPoly(7, 4);
-		Polynomial p2 = new ArrayBasedPoly(3, 1);
+		Pd2RonnieMohapatraPolynomial p = new Pd2RonnieMohapatraArrayBasedPoly(5, 2);
+		Pd2RonnieMohapatraPolynomial p1 = new Pd2RonnieMohapatraArrayBasedPoly(7, 4);
+		Pd2RonnieMohapatraPolynomial p2 = new Pd2RonnieMohapatraArrayBasedPoly(3, 1);
 		
-		Polynomial[] polys = {p, p1, p2};
+		Pd2RonnieMohapatraPolynomial[] polys = {p, p1, p2};
 		Bag ofPolys = new ArrayBag(polys);
 		
 		ofPolys.printBag();
 		
-		ofPolys.add(new ArrayBasedPoly(2, 5));
+		ofPolys.add(new Pd2RonnieMohapatraArrayBasedPoly(2, 5));
 		
 		System.out.println();
 		
