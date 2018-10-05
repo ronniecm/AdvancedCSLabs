@@ -59,11 +59,12 @@ public class Pd2RonnieMohapatraListNodeLinkedListLab
    public static void main(String [] args)
    {
       Scanner input = new Scanner (System.in);
-      ListNode <Integer> h = new ListNode( 5, null);
+      ListNode <Integer> h = new ListNode<Integer>(5, null);
+      
       h= new ListNode(4, h);
       h= new ListNode(3, h);
       h= new ListNode(2, h);
-      h= new ListNode(1, h);
+      h= new ListNode(1, h); 
         
       char option ;
       
@@ -71,69 +72,79 @@ public class Pd2RonnieMohapatraListNodeLinkedListLab
       do
       {
     	  option = menu();
-    	  if( option  == 'a')
-    	  {
-    		  System.out.println("list: ");
-    		  printLinkedList(h);
-    	  }	
-    	  else if(option == 'b')
-          {
-    		  System.out.println("The List has atleast two element?");
-    		  System.out.println(hasTwo(h));
-          }	
-    	  else if( option  =='c')
-         {
-            System.out.print("The size of the array is: ");
-            System.out.println(size(h));
-         }	
-         else if( option  == 'd')
-         {
-            h = removeFirst(h);
-            System.out.print("New list is: ");
-            printLinkedList(h);
-         }
-         else  if( option  == 'e')
-         {
-            System.out.println("Enter number: ");
-            int num = input.nextInt();
-            add(h, new Integer(num));
-            System.out.println("New list is: ");
-            printLinkedList(h);
-         }
-         else if( option  == 'f')
-         {
-            h = reverseList(h);
-            System.out.println("Reverse is: ");
-            printLinkedList(h);
-         }
-         else if( option  == 'g')
-         {
-            h = rotate(h);
-            System.out.println("rotated array is: ");
-            printLinkedList(h);
-         }
-         else if( option  == 'h')
-         {
-            printLinkedList(h);
-            System.out.println("\nmiddle node is: "+middleNode(h).getValue());
-         }
+    	  try {
+    		  if( option  == 'a')
+    		  {
+    			  System.out.print("list: ");
+    			  printLinkedList(h);
+    		  }	
+    		  else if(option == 'b')
+    		  {	
+    			  System.out.println("The List has atleast two element?");
+    			  System.out.println(hasTwo(h));
+    		  }	
+    		  else if( option  =='c')
+    		  {	
+    			  System.out.print("The size of the array is: ");
+    			  System.out.println(size(h));
+    		  }	
+    		  else if( option  == 'd')
+    		  {
+    			  h = removeFirst(h);
+    			  System.out.print("New list is: ");
+    			  printLinkedList(h);    			  
+    		  }
+    		  else  if( option  == 'e')
+    		  {
+    			  System.out.println("Enter number: ");
+    			  int num = input.nextInt();
+    			  h = add(h, new Integer(num));
+    			  System.out.println("New list is: ");
+    			  printLinkedList(h);
+    		  }
+    		  else if( option  == 'f')
+    		  {
+    			  h = reverseList(h);
+    			  System.out.println("Reverse is: ");
+    			  printLinkedList(h);
+    		  }
+    		  else if( option  == 'g')
+    		  {
+    			  h = rotate(h);
+    			  System.out.println("rotated array is: ");
+    			  printLinkedList(h);
+    		  }
+    		  else if( option  == 'h')
+    		  {
+    			  printLinkedList(h);
+    			  System.out.println("\nmiddle node is: "+middleNode(h).getValue());
+    		  }
          
-         else if( option  == 'i')
-         {
-            h = removeLast(h);
-            System.out.print("New list is: ");
-            printLinkedList(h);
-         }
+    		  else if( option  == 'i')
+    		  {
+    			  h = removeLast(h);
+    			  System.out.print("New list is: ");
+    			  printLinkedList(h);
+    		  }
          
-         else if( option == 'j')
-         {
-        	 System.out.println("Enter the value you would like to remove:");
-        	 int removed = input.nextInt();
-        	 h = remove(h, removed);
-        	 System.out.print("New list is: ");
-        	 printLinkedList(h);
-         }
-    	 }
+    		  else if( option == 'j')
+    		  {
+    			  System.out.println("Enter the value you would like to remove:");
+    			  int removed = input.nextInt();
+    			  h = remove(h, removed);
+    			  System.out.print("New list is: ");
+    			  printLinkedList(h);
+    		  }
+    		  else if(option == 'k')
+    		  {
+    			  h = splitList(h);
+    			  System.out.print("New list is: ");
+    			  printLinkedList(h);
+    		  }
+    	  } catch(NullPointerException e) {
+    		  System.out.println("Empty");
+    	  }
+    	}
       	while (option != 'z');
    }  // end of main
    
@@ -143,14 +154,10 @@ public class Pd2RonnieMohapatraListNodeLinkedListLab
     */
    public static void printLinkedList(ListNode <Integer> head) 
    {
-	  try {
-	  System.out.print(head.getValue() + " ");
-	  
-	  if(head.getNext() != null)
-		  printLinkedList(head.getNext());  
-	  } catch(NullPointerException e) {
-		  System.out.println("No elements in the list");
-	  }
+	   System.out.print(head.getValue() + " ");
+		  
+	   if(head.getNext() != null)
+		   printLinkedList(head.getNext());  
    }
    
    /*
@@ -181,8 +188,14 @@ public class Pd2RonnieMohapatraListNodeLinkedListLab
     */
    public static ListNode <Integer> removeFirst(ListNode <Integer> head) 
    {	
-	   return head.getNext(); //head.getNext() is head without the first node
-   }
+	   if(head != null)
+		{
+		   head = head.getNext();
+		   return head; //head.getNext() is head without the first node
+		}
+	   else
+		   throw new NullPointerException();
+   }	
    /*
     * pre-condition: head != null
     * post-condition: returns head with last node removed
@@ -191,7 +204,7 @@ public class Pd2RonnieMohapatraListNodeLinkedListLab
    {
 	   if(head.getNext() != null)
 	   {
-		  head.setNext(removeLast(head.getNext())); //for every node except the last, setNext to its usual node
+		  head.setNext(removeLast(head.getNext())); //for every node except the last, setNext to its usual next node
 		  return head;
 	   }
 	   
@@ -204,16 +217,17 @@ public class Pd2RonnieMohapatraListNodeLinkedListLab
    public static ListNode <Integer> remove(ListNode<Integer> head, Integer value) 
    {
 	   try { //try-catch for a null-pointer exception if value is not found
-		   if(head.getNext().getValue() != value)
+		   if(head.getValue() != value)
 		   {
 			   head.setNext(remove(head.getNext(), value));   
 			   return head;
 		   }
 	   
-		   head.setNext(head.getNext().getNext()); 
-	   	   } catch (NullPointerException e) {
+		   return head.getNext(); 
+	   	   
+	   } catch (NullPointerException e) {
 	   		   System.out.println("Value not found");
-	   	   }
+	   }
 	   return head;
    }
    /*
@@ -222,13 +236,19 @@ public class Pd2RonnieMohapatraListNodeLinkedListLab
     */
    public static ListNode<Integer> add(ListNode <Integer> head, Integer value) 
    {
-	   if(head.getNext() != null)
+	   if(size(head) == 0) //if list is empty
 	   {
-		   head.setNext(add(head.getNext(), value));
+		   head = new ListNode<Integer>(value, null);
 		   return head;
 	   }
 	   
-	   return new ListNode<Integer>(value, null);
+	   if(head == null) //base case for reaching the last node
+	   {
+		   return new ListNode<Integer>(value, null);
+	   }
+	   
+	   head.setNext(add(head.getNext(), value)); //keeping list unchanged until the end
+	   return head;
    }
    /*
     * pre-condition: head != null
@@ -239,10 +259,10 @@ public class Pd2RonnieMohapatraListNodeLinkedListLab
 	   if(head.getNext() == null)
 		   return head; //starts the reversed list with the last node
 	   
-	   ListNode<Integer> ret = reverseList(head.getNext()); 
-	   head.getNext().setNext(head); //takes current node and links it to the end
-	   head.setNext(null); //makes the node the last one officially
-	   return ret; 
+		ListNode<Integer> ret = reverseList(head.getNext()); 
+		head.getNext().setNext(head); //takes current node and links it to the end
+		head.setNext(null); //makes the node the last one officially
+		return ret;
    }
    /*
     * pre-condition: head != null
@@ -358,8 +378,7 @@ j) Remove any node
 k) Split the list
 z) Quit?
 a
-list: 
-1 2 3 4 5 
+list: 1 2 3 4 5 
 ====> What would you like to do?
 a) Print list
 b) Check if list has at least two nodes
@@ -425,7 +444,7 @@ e
 Enter number: 
 6
 New list is: 
-2 3 4 6 
+2 3 4 5 6 
 ====> What would you like to do?
 a) Print list
 b) Check if list has at least two nodes
@@ -441,7 +460,7 @@ k) Split the list
 z) Quit?
 f
 Reverse is: 
-6 4 3 2 
+6 5 4 3 2 
 ====> What would you like to do?
 a) Print list
 b) Check if list has at least two nodes
@@ -457,7 +476,7 @@ k) Split the list
 z) Quit?
 g
 rotated array is: 
-4 3 2 6 
+5 4 3 2 6 
 ====> What would you like to do?
 a) Print list
 b) Check if list has at least two nodes
@@ -472,8 +491,8 @@ j) Remove any node
 k) Split the list
 z) Quit?
 h
-4 3 2 6 
-middle node is: 2
+5 4 3 2 6 
+middle node is: 3
 
 ====> What would you like to do?
 a) Print list
@@ -489,7 +508,7 @@ j) Remove any node
 k) Split the list
 z) Quit?
 i
-New list is: 4 3 2 
+New list is: 5 4 3 2 
 ====> What would you like to do?
 a) Print list
 b) Check if list has at least two nodes
@@ -505,8 +524,8 @@ k) Split the list
 z) Quit?
 j
 Enter the value you would like to remove:
-3
-New list is: 4 2 
+4
+New list is: 5 3 2 
 ====> What would you like to do?
 a) Print list
 b) Check if list has at least two nodes
@@ -520,42 +539,191 @@ i) Remove last node
 j) Remove any node
 k) Split the list
 z) Quit?
-j
-Enter the value you would like to remove:
-1
-Value not found
-New list is: 4 2 
-====> What would you like to do?
-a) Print list
-b) Check if list has at least two nodes
-c) Get size of the list
-d) Remove first node
-e) Add a node
-f) Reverse
-g) Rotate
-h) Get middle node
-i) Remove last node
-j) Remove any node
-k) Split the list
-z) Quit?
-d
-New list is: 2 
-====> What would you like to do?
-a) Print list
-b) Check if list has at least two nodes
-c) Get size of the list
-d) Remove first node
-e) Add a node
-f) Reverse
-g) Rotate
-h) Get middle node
-i) Remove last node
-j) Remove any node
-k) Split the list
-z) Quit?
-d
-New list is: No elements in the list
+k
+New list is: Empty
 
+====> What would you like to do?
+a) Print list
+b) Check if list has at least two nodes
+c) Get size of the list
+d) Remove first node
+e) Add a node
+f) Reverse
+g) Rotate
+h) Get middle node
+i) Remove last node
+j) Remove any node
+k) Split the list
+z) Quit?
+a
+list: Empty
+
+====> What would you like to do?
+a) Print list
+b) Check if list has at least two nodes
+c) Get size of the list
+d) Remove first node
+e) Add a node
+f) Reverse
+g) Rotate
+h) Get middle node
+i) Remove last node
+j) Remove any node
+k) Split the list
+z) Quit?
+b
+The List has atleast two element?
+false
+
+====> What would you like to do?
+a) Print list
+b) Check if list has at least two nodes
+c) Get size of the list
+d) Remove first node
+e) Add a node
+f) Reverse
+g) Rotate
+h) Get middle node
+i) Remove last node
+j) Remove any node
+k) Split the list
+z) Quit?
+c
+The size of the array is: 0
+
+====> What would you like to do?
+a) Print list
+b) Check if list has at least two nodes
+c) Get size of the list
+d) Remove first node
+e) Add a node
+f) Reverse
+g) Rotate
+h) Get middle node
+i) Remove last node
+j) Remove any node
+k) Split the list
+z) Quit?
+d
+Empty
+
+====> What would you like to do?
+a) Print list
+b) Check if list has at least two nodes
+c) Get size of the list
+d) Remove first node
+e) Add a node
+f) Reverse
+g) Rotate
+h) Get middle node
+i) Remove last node
+j) Remove any node
+k) Split the list
+z) Quit?
+f
+Empty
+
+====> What would you like to do?
+a) Print list
+b) Check if list has at least two nodes
+c) Get size of the list
+d) Remove first node
+e) Add a node
+f) Reverse
+g) Rotate
+h) Get middle node
+i) Remove last node
+j) Remove any node
+k) Split the list
+z) Quit?
+g
+Empty
+
+====> What would you like to do?
+a) Print list
+b) Check if list has at least two nodes
+c) Get size of the list
+d) Remove first node
+e) Add a node
+f) Reverse
+g) Rotate
+h) Get middle node
+i) Remove last node
+j) Remove any node
+k) Split the list
+z) Quit?
+h
+Empty
+
+====> What would you like to do?
+a) Print list
+b) Check if list has at least two nodes
+c) Get size of the list
+d) Remove first node
+e) Add a node
+f) Reverse
+g) Rotate
+h) Get middle node
+i) Remove last node
+j) Remove any node
+k) Split the list
+z) Quit?
+i
+Empty
+
+====> What would you like to do?
+a) Print list
+b) Check if list has at least two nodes
+c) Get size of the list
+d) Remove first node
+e) Add a node
+f) Reverse
+g) Rotate
+h) Get middle node
+i) Remove last node
+j) Remove any node
+k) Split the list
+z) Quit?
+j
+Enter the value you would like to remove:
+5
+Value not found
+New list is: Empty
+
+====> What would you like to do?
+a) Print list
+b) Check if list has at least two nodes
+c) Get size of the list
+d) Remove first node
+e) Add a node
+f) Reverse
+g) Rotate
+h) Get middle node
+i) Remove last node
+j) Remove any node
+k) Split the list
+z) Quit?
+k
+New list is: Empty
+
+====> What would you like to do?
+a) Print list
+b) Check if list has at least two nodes
+c) Get size of the list
+d) Remove first node
+e) Add a node
+f) Reverse
+g) Rotate
+h) Get middle node
+i) Remove last node
+j) Remove any node
+k) Split the list
+z) Quit?
+e
+Enter number: 
+1
+New list is: 
+1 
 ====> What would you like to do?
 a) Print list
 b) Check if list has at least two nodes

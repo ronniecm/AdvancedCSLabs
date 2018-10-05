@@ -67,7 +67,7 @@ public class Pd2RonnieMohapatraArrayBasedPoly implements Pd2RonnieMohapatraPolyn
 	 * pre-condition: none
 	 * post-condition: p(x) is returned
 	 */
-	public double evaluate(int x)
+	public double evaluate(double x)
 	{
 		double answer = 0;
 		
@@ -172,13 +172,9 @@ public class Pd2RonnieMohapatraArrayBasedPoly implements Pd2RonnieMohapatraPolyn
 		return new Pd2RonnieMohapatraArrayBasedPoly(c2);
 	}
 	
-	public Pd2RonnieMohapatraPolynomial times(double factor)
+	public Pd2RonnieMohapatraPolynomial multiply(Pd2RonnieMohapatraPolynomial other)
 	{
-		double[] c1 = new double[c.length];
-		for(int i = 0; i < c1.length; i++)
-			c1[i] = factor * c[i];
-		
-		return new Pd2RonnieMohapatraArrayBasedPoly(c1);
+		return null;
 	}
 	
 	/*
