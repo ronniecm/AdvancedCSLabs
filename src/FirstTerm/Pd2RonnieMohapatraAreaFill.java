@@ -1,6 +1,6 @@
 package FirstTerm;
-//name:
-   //date:
+//name: Ronnie Mohapatra
+//date: October 21, 2018
    
    import java.util.Scanner;
    import java.io.*;
