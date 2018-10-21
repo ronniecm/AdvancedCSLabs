@@ -1,6 +1,6 @@
 package FirstTerm;
-//name: Ronnie Mohapatra
-//date: October 21, 2018
+//name:
+   //date:
    
    import java.util.Scanner;
    import java.io.*;
