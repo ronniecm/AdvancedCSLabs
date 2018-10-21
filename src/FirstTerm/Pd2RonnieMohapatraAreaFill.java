@@ -6,12 +6,12 @@ package FirstTerm;
    import java.io.*;
     public class Pd2RonnieMohapatraAreaFill
    {
-      public static char[][] grid = null;
-   
-       public static void main(String[] args) throws FileNotFoundException
-      {
     	
-         Scanner sc = new Scanner(System.in);
+      public static char[][] grid = null;
+      public static Scanner sc = new Scanner(System.in);
+       
+     public static void main(String[] args) throws FileNotFoundException
+      {
          int option = 0;
          do {
         	 try {
