@@ -3,11 +3,13 @@ package FirstTerm;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
+import java.util.Scanner;
+import java.util.Timer;
 
 public class Pd2RonnieMohapatraMazeGui extends JPanel {
 	private Pd2RonnieMohapatraMaze maze;
 	private JButton[][] mazeGrid;
-	private JPanel grid;
+	private JPanel centerPanel;
 	private JPanel south;
 	private JButton reset;
 	private JButton saveBut;
@@ -19,14 +21,15 @@ public class Pd2RonnieMohapatraMazeGui extends JPanel {
 	private boolean isBlack = true;
 	private JPanel north;
 	private JLabel nLabel;
+	private Timer timer = new Timer();
 	
 	public Pd2RonnieMohapatraMazeGui()
 	{
 		setLayout(new BorderLayout());		
 		maze = new Pd2RonnieMohapatraMaze();
-		grid = new JPanel();
-		grid.setLayout(new GridLayout(maze.getRows(), maze.getCols()));
-		add(grid, BorderLayout.CENTER);
+		centerPanel = new JPanel();
+		centerPanel.setLayout(new GridLayout(maze.getRows(), maze.getCols()));
+		add(centerPanel, BorderLayout.CENTER);
 		
 		mazeGrid = new JButton[maze.getRows()][maze.getCols()];
 		
@@ -36,13 +39,14 @@ public class Pd2RonnieMohapatraMazeGui extends JPanel {
 			{
 				mazeGrid[r][c] = new JButton();
 				mazeGrid[r][c].setOpaque(true);
+				mazeGrid[r][c].setBorderPainted(false);
 				
 				if(maze.getGrid()[r][c] == 0)
 					mazeGrid[r][c].setBackground(Color.black);
 				else
 					mazeGrid[r][c].setBackground(Color.white);
 				
-				grid.add(mazeGrid[r][c]);
+				centerPanel.add(mazeGrid[r][c]);
 				
 				mazeGrid[r][c].addActionListener(new Listener1(r, c));
 			}
@@ -82,141 +86,6 @@ public class Pd2RonnieMohapatraMazeGui extends JPanel {
 		nLabel.setHorizontalAlignment(SwingConstants.CENTER);
 	}
 	
-	private class Pd2RonnieMohapatraMaze
-	{
-	   private final int VISITED = 3;
-	   private final int PATH = 7;
-	   private final int NOT_YET = 1;
-	   private final int BLOCKED = 0;
-
-	   private int [] [] grid = 
-	   {
-	      {1,1,1,0,1,1,0,0,0,1,1,1,1},
-	      {1,0,1,1,1,0,1,1,1,1,0,0,1},
-	      {0,0,0,0,1,0,1,0,1,0,1,0,0},
-	      {1,1,1,0,1,1,1,0,1,0,0,1,1},
-	      {1,0,1,0,0,0,0,1,1,1,0,0,1},
-	      {1,0,1,1,1,1,1,1,0,1,1,1,0},
-	      {1,0,0,0,0,0,0,0,0,0,0,0,0},
-	      {1,1,1,1,1,1,1,1,1,1,1,1,1}
-	    }; 
-	   
-	   
-	    
-	// Use a smaller maze first
-	   /*
-	   private int [] [] grid = 
-	   {
-	      {1,1,1},
-	      {1,0,1},
-	      {0,0,1}
-	   }; 
-		*/
-	   // Assumption: the exit is at the bottom right corner of the grid
-	   //
-	   public boolean findAnExit (int x, int y)
-	   {
-	      String path = "";
-	      return findAnExitHelper(x, y, path);
-	   }  // FindAnExit
-
-
-	   public boolean findAnExitHelper (int x, int y, String path)
-	   {
-		   if(x < 0 || y < 0 || x > grid.length - 1 || y > grid[0].length - 1)
-			   return false;
-		   
-		   if(x == grid.length - 1 && y == grid[0].length - 1)
-		   {
-			   grid[x][y] = 7;
-			   path += "[" + x + ", " + y + "]";
-			   System.out.println(path);
-			   return true;
-		   }
-		   
-		   if(grid[x][y] != 1)
-			   return false;
-		   
-		   grid[x][y] = 7;
-		   
-			  
-		   path += "[" + x + ", " + y + "], ";
-
-		   
-		   int up = x - 1, down = x + 1, right = y + 1, left = y - 1;
-		   
-		   if(findAnExitHelper(up, y, path))
-			   return true;
-		   if(findAnExitHelper(down, y, path))
-			   return true;
-		   if(findAnExitHelper(x, left, path))
-			   return true;
-		   if(findAnExitHelper(x, right, path))
-			   return true;
-		   
-		   grid[x][y] = 3;	 
-		   
-		   return false;
-	   } // findAnExitHelper
-	   
-	   public int getRows()
-	   {
-		   return grid.length;
-	   }
-	   
-	   public int getCols()
-	   {
-		   return grid[0].length;
-	   }
-	   
-	   public int[][] getGrid()
-	   {
-		   return grid;
-	   }
-	   
-	   public void setCoordinate(int r, int c, int val)
-	   {
-		   grid[r][c] = val;
-	   }
-	   
-	   public void resetGrid()
-	   {
-		   for(int r = 0; r < grid.length; r++)
-		   {
-			   for(int c = 0; c < grid[0].length; c++)
-			   {
-				   if(grid[r][c] == 7 || grid[r][c] == 3)
-					   grid[r][c] = 1;
-			   }
-		   }
-	   }
-	   
-	   public void clearGrid()
-	   {
-		   for(int r = 0; r < grid.length; r++)
-		   {
-			   for(int c = 0; c < grid[0].length; c++)
-			   {
-				   grid[r][c] = 1;
-			   }
-		   }
-	   }
-	   public String toString()
-	   {
-	      String result = "";
-	      for(int r = 0; r < grid.length; r++)
-	      {
-	    	  for(int c = 0; c < grid[0].length; c++)
-	    	  {
-	    		  result += grid[r][c]+ " ";
-	    	  }
-	    	  result += "\n";
-	      }
-	      
-	      return result;
-	   } // toString
-	}
-	
 	private class Listener1 implements ActionListener
 	{
 		private int myRow, myCol;
@@ -236,11 +105,10 @@ public class Pd2RonnieMohapatraMazeGui extends JPanel {
 			else
 			{
 				resetMaze();
-				if(!maze.findAnExit(myRow, myCol))
+				if(!solveWithColor(myRow, myCol))
 					nLabel.setText("No solution from: (" + myRow + ", " + myCol + "). Try another point or edit the maze.");
 				else
-				{			
-					generate();
+				{
 					nLabel.setText("Solution found from (" + myRow + ", " + myCol + ")!");
 				}
 			}
@@ -301,6 +169,69 @@ public class Pd2RonnieMohapatraMazeGui extends JPanel {
 		}
 	}
 	
+	public boolean solveWithColor(int r, int c)
+	{
+		
+		if(r < 0 || r > mazeGrid.length - 1 || c < 0 || c > mazeGrid[0].length - 1)
+		{
+			return false;
+		}
+		
+		try {
+			timer.wait(100);
+		} catch(Exception e) {
+			e.getStackTrace();
+		}
+		
+		if(r == mazeGrid.length - 1 && c == mazeGrid[0].length - 1)
+		{
+			mazeGrid[r][c].setBackground(Color.green);
+			maze.setCoordinate(r, c, 7);
+			return true;
+		}
+		
+		if(maze.getGrid()[r][c] != 1)
+		{
+			try {
+				Thread.sleep(10);
+			} catch (Exception e)
+			{
+				e.getStackTrace();
+			}
+			return false;
+		}
+		
+		try {
+			Thread.sleep(10);
+			mazeGrid[r][c].setBackground(Color.GREEN);		
+			maze.setCoordinate(r, c, 7);
+		} catch(Exception e) {
+			e.getStackTrace();
+		}
+		
+		int up = r - 1, down = r + 1, right = c + 1, left = c - 1;
+		
+		if(solveWithColor(down, c))
+			return true;
+		if(solveWithColor(r, right))
+			return true;
+		if(solveWithColor(r, left))
+			return true;
+		if(solveWithColor(up, c))
+			return true;
+		
+		maze.setCoordinate(r, c, 3);
+		mazeGrid[r][c].setBackground(Color.red);
+		
+		try {
+			Thread.sleep(10);
+		} catch (Exception e)
+		{
+			e.getStackTrace();
+		}
+		return false;
+	}
+	
 	public void resetMaze()
 	{
 		maze.resetGrid();
@@ -316,9 +247,9 @@ public class Pd2RonnieMohapatraMazeGui extends JPanel {
 				if(maze.getGrid()[r][c] == 0)
 					mazeGrid[r][c].setBackground(Color.black);
 				else if(maze.getGrid()[r][c] == 7)
-					mazeGrid[r][c].setBackground(Color.green);
+					mazeGrid[r][c].setBackground(Color.GREEN);
 				else
-					mazeGrid[r][c].setBackground(Color.white);
+					mazeGrid[r][c].setBackground(Color.white);	
 			}
 		}
 	}
@@ -340,5 +271,9 @@ public class Pd2RonnieMohapatraMazeGui extends JPanel {
 		frame.setContentPane(new Pd2RonnieMohapatraMazeGui());
 		frame.setVisible(true);
 		frame.setLocation(0, 0);
+		
+		// Assume that the exit of the maze is at the lower right hand corner of 
+		// the grid
+
 	}
 }
