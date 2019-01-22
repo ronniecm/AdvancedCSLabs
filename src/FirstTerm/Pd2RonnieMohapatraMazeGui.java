@@ -32,7 +32,7 @@ public class Pd2RonnieMohapatraMazeGui extends JPanel {
 		add(centerPanel, BorderLayout.CENTER);
 		
 		mazeGrid = new JButton[maze.getRows()][maze.getCols()];
-		
+
 		for(int r = 0; r < maze.getRows(); r++)
 		{
 			for(int c = 0; c < maze.getCols(); c++)
@@ -171,65 +171,7 @@ public class Pd2RonnieMohapatraMazeGui extends JPanel {
 	
 	public boolean solveWithColor(int r, int c)
 	{
-		
-		if(r < 0 || r > mazeGrid.length - 1 || c < 0 || c > mazeGrid[0].length - 1)
-		{
-			return false;
-		}
-		
-		try {
-			timer.wait(100);
-		} catch(Exception e) {
-			e.getStackTrace();
-		}
-		
-		if(r == mazeGrid.length - 1 && c == mazeGrid[0].length - 1)
-		{
-			mazeGrid[r][c].setBackground(Color.green);
-			maze.setCoordinate(r, c, 7);
-			return true;
-		}
-		
-		if(maze.getGrid()[r][c] != 1)
-		{
-			try {
-				Thread.sleep(10);
-			} catch (Exception e)
-			{
-				e.getStackTrace();
-			}
-			return false;
-		}
-		
-		try {
-			Thread.sleep(10);
-			mazeGrid[r][c].setBackground(Color.GREEN);		
-			maze.setCoordinate(r, c, 7);
-		} catch(Exception e) {
-			e.getStackTrace();
-		}
-		
-		int up = r - 1, down = r + 1, right = c + 1, left = c - 1;
-		
-		if(solveWithColor(down, c))
-			return true;
-		if(solveWithColor(r, right))
-			return true;
-		if(solveWithColor(r, left))
-			return true;
-		if(solveWithColor(up, c))
-			return true;
-		
-		maze.setCoordinate(r, c, 3);
-		mazeGrid[r][c].setBackground(Color.red);
-		
-		try {
-			Thread.sleep(10);
-		} catch (Exception e)
-		{
-			e.getStackTrace();
-		}
-		return false;
+		return true;
 	}
 	
 	public void resetMaze()
