@@ -4,7 +4,7 @@ import java.awt.event.*;
 import java.util.Stack;
 import java.awt.*;
 
-public class StackCalc extends JPanel {
+public class Calculator extends JPanel {
 	private JPanel numsPanel;
 	private JTextField calcText;
 	private JButton[][] nums = new JButton[4][3];
@@ -17,7 +17,7 @@ public class StackCalc extends JPanel {
 	private JPanel east;
 	private JPanel parenthesesPanel;
 
-	public StackCalc()
+	public Calculator()
 	{
 		setLayout(new BorderLayout());
 		
@@ -266,7 +266,7 @@ public class StackCalc extends JPanel {
 		frame.setLocation(0, 0);
 		frame.setSize(810, 450);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setContentPane(new StackCalc());
+		frame.setContentPane(new Calculator());
 		frame.setVisible(true);
 	}
 }

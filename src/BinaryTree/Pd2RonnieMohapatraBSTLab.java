@@ -33,7 +33,6 @@ public class Pd2RonnieMohapatraBSTLab
 {
    public static void main(String[] args)
    {
-          // your code goes here
 	   String input;
        Scanner s = new Scanner(System.in);
        do {
@@ -56,8 +55,7 @@ public class Pd2RonnieMohapatraBSTLab
 	       System.out.println("Max: " + max(t));
 	       System.out.print("In order: ");
 	       smallToLarge(t);
-	       System.out.println("\n");
-       } while(true);
+       } while(true);       
    }
       
    	/****************************************************************
@@ -148,6 +146,8 @@ public class Pd2RonnieMohapatraBSTLab
 		   smallToLarge(t.getRight());
 	   }
    }
+   
+   
 }  //end of class
 
 /* Output
