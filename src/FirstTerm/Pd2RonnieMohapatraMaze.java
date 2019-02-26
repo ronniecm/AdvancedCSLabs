@@ -65,13 +65,13 @@ public class Pd2RonnieMohapatraMaze {
 		   int up = x - 1, down = x + 1, right = y + 1, left = y - 1; //directional assignments
 		   
 		   //keeps recursing up down left and right until it return false so it moves on to the next point
-		   if(findAnExitHelper(up, y, path))
-			   return true;
 		   if(findAnExitHelper(down, y, path))
 			   return true;
-		   if(findAnExitHelper(x, left, path))
-			   return true;
 		   if(findAnExitHelper(x, right, path))
+			   return true;
+		   if(findAnExitHelper(up, y, path))
+			   return true;
+		   if(findAnExitHelper(x, left, path))
 			   return true;
 		   
 		   grid[x][y] = VISITED;	 
@@ -117,7 +117,7 @@ public class Pd2RonnieMohapatraMaze {
 		   {
 			   for(int c = 0; c < grid[0].length; c++)
 			   {
-				   grid[r][c] = PATH;
+				   grid[r][c] = NOT_YET;
 			   }
 		   }
 	   }

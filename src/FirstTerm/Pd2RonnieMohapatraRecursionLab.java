@@ -82,7 +82,35 @@ public class Pd2RonnieMohapatraRecursionLab
 	   printWithCommas(x / 1000);
 	   System.out.print("," + x % 1000);
    }
+   
+   public static void subset(String word)
+   {
+	   subset("", word);
+   }
+   
+   public static void subset(String soFar, String theRest)
+   {
+	   System.out.println(soFar);
+	   
+	   for(int i = 0; i < theRest.length(); i++)
+	   {
+		   subset(soFar + theRest.charAt(i), theRest.substring(i+1));
+	   }
+   }
 	
+   public static void permutate(String word)
+   {
+	  permutate("", word);
+   }
+   
+   public static void permutate(String soFar, String theRest)
+   {
+	   System.out.println(soFar);
+	   for(int i = 0; i < theRest.length(); i++)
+	   {
+		   permutate(soFar + theRest.charAt(i), theRest.substring(0, i) + theRest.substring(i+1));
+	   }
+   }
 	
    public static void main(String []args)
    {
@@ -96,7 +124,9 @@ public class Pd2RonnieMohapatraRecursionLab
                            "\n4)Reverse"+
                            "\n5)Base 5"+
                            "\n6)Print With Commas"+
-                           "\n7)Exit");
+                           "\n7)Permuations of a String" +
+                           "\n8)Subsets of a String" + 
+                           "\n9)Exit");
          choice = scan.nextInt();
          if (choice == 1)
          {
@@ -139,8 +169,17 @@ public class Pd2RonnieMohapatraRecursionLab
                printWithCommas(number);
             else
                System.out.println("That number is not valid");
+         } else if(choice == 7)
+         {
+        	 System.out.println("Enter a string");
+        	 String word = scan.next();
+        	 permutate(word);
+         } else if(choice == 8) {
+        	 System.out.println("Enter a string");
+        	 String word = scan.next();
+        	 subset(word);
          }
-      }while(choice != 7);
+      }while(choice != 9);
    }
 }
 

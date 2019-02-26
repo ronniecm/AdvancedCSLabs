@@ -4,11 +4,12 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 import java.util.Scanner;
+import java.util.Timer;
 
 public class Pd2RonnieMohapatraMazeGui extends JPanel {
 	private Pd2RonnieMohapatraMaze maze;
 	private JButton[][] mazeGrid;
-	private JPanel grid;
+	private JPanel centerPanel;
 	private JPanel south;
 	private JButton reset;
 	private JButton saveBut;
@@ -20,30 +21,32 @@ public class Pd2RonnieMohapatraMazeGui extends JPanel {
 	private boolean isBlack = true;
 	private JPanel north;
 	private JLabel nLabel;
+	private Timer timer = new Timer();
 	
 	public Pd2RonnieMohapatraMazeGui()
 	{
 		setLayout(new BorderLayout());		
 		maze = new Pd2RonnieMohapatraMaze();
-		grid = new JPanel();
-		grid.setLayout(new GridLayout(maze.getRows(), maze.getCols()));
-		add(grid, BorderLayout.CENTER);
+		centerPanel = new JPanel();
+		centerPanel.setLayout(new GridLayout(maze.getRows(), maze.getCols()));
+		add(centerPanel, BorderLayout.CENTER);
 		
 		mazeGrid = new JButton[maze.getRows()][maze.getCols()];
-		
+
 		for(int r = 0; r < maze.getRows(); r++)
 		{
 			for(int c = 0; c < maze.getCols(); c++)
 			{
 				mazeGrid[r][c] = new JButton();
 				mazeGrid[r][c].setOpaque(true);
+				mazeGrid[r][c].setBorderPainted(false);
 				
 				if(maze.getGrid()[r][c] == 0)
 					mazeGrid[r][c].setBackground(Color.black);
 				else
 					mazeGrid[r][c].setBackground(Color.white);
 				
-				grid.add(mazeGrid[r][c]);
+				centerPanel.add(mazeGrid[r][c]);
 				
 				mazeGrid[r][c].addActionListener(new Listener1(r, c));
 			}
@@ -102,11 +105,10 @@ public class Pd2RonnieMohapatraMazeGui extends JPanel {
 			else
 			{
 				resetMaze();
-				if(!maze.findAnExit(myRow, myCol))
+				if(!solveWithColor(myRow, myCol))
 					nLabel.setText("No solution from: (" + myRow + ", " + myCol + "). Try another point or edit the maze.");
 				else
-				{			
-					generate();
+				{
 					nLabel.setText("Solution found from (" + myRow + ", " + myCol + ")!");
 				}
 			}
@@ -167,6 +169,11 @@ public class Pd2RonnieMohapatraMazeGui extends JPanel {
 		}
 	}
 	
+	public boolean solveWithColor(int r, int c)
+	{
+		return true;
+	}
+	
 	public void resetMaze()
 	{
 		maze.resetGrid();
@@ -182,9 +189,9 @@ public class Pd2RonnieMohapatraMazeGui extends JPanel {
 				if(maze.getGrid()[r][c] == 0)
 					mazeGrid[r][c].setBackground(Color.black);
 				else if(maze.getGrid()[r][c] == 7)
-					mazeGrid[r][c].setBackground(Color.green);
+					mazeGrid[r][c].setBackground(Color.GREEN);
 				else
-					mazeGrid[r][c].setBackground(Color.white);
+					mazeGrid[r][c].setBackground(Color.white);	
 			}
 		}
 	}
@@ -209,30 +216,6 @@ public class Pd2RonnieMohapatraMazeGui extends JPanel {
 		
 		// Assume that the exit of the maze is at the lower right hand corner of 
 		// the grid
-	    Pd2RonnieMohapatraMaze m = new Pd2RonnieMohapatraMaze();
-	       
-	    // display the maze  
-	    System.out.println (m);
-	    Scanner input = new Scanner (System.in);
-	       
-	       System.out.println ("Start location coordinates (separated by a space): ");
-	       int startX = input.nextInt();
-	       int startY = input.nextInt();
-	         
-	       while (!m.findAnExit(startX, startY))
-	       {
-	          System.out.println ("Still trapped inside!");
-	          System.out.println (m);
-	          
-	          System.out.println ("Start location coordinates (separated by a space): ");
-	          startX = input.nextInt();
-	          startY = input.nextInt();
-	       }
-	          
-	       System.out.println ("Successfully exit the maze!!!");
-	               
-	       // display the path (indicated by 7) that leads to the exit of the maze
-	       // also display locations tried
-	       System.out.println (m);
+
 	}
 }
