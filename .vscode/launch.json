@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Pd2RonnieMohapatraHeapPriorityQueueLab",
+            "request": "launch",
+            "mainClass": "PriorityQueue.Pd2RonnieMohapatraHeapPriorityQueueLab",
+            "projectName": "AdvancedCS"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Pd2RonnieMohapatraHeapSortLab",
+            "request": "launch",
+            "mainClass": "PriorityQueue.Pd2RonnieMohapatraHeapSortLab",
+            "projectName": "AdvancedCS"
+        }
+    ]
+}
