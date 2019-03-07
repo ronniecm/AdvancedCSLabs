@@ -217,6 +217,14 @@ public class Pd2RonnieMohapatraMazeGUI extends JPanel {
 		add(newMazeButton, BorderLayout.WEST);		
 	}
 	
+	public static void main(String[] args) {
+		JFrame frame = new JFrame("Maze");
+		frame.setLocation(0, 0);
+		frame.setSize(1380, 730);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setContentPane(new Pd2RonnieMohapatraMazeGUI(0));
+		frame.setVisible(true);
+	}
 	/*
 	 * pre-condition: grid and buttonGrid are not empty
 	 * post-condition: resets matrix to original state and buttonGrid to black and white

@@ -1,8 +1,10 @@
-//Name:   
-//Date:
-// What I learned:
-// How I feel about this lab:
-// I am wondering:
+//Name:  Ronnie Mohapatra  
+//Date: March 4, 2019
+// What I learned: a). Algorithm of using a heap to sort elements in a list
+//                 b). Good refresher on Math.random()
+//                 c). Algorithm for making a heap out of randomly sorted elements
+// How I feel about this lab: I think it was fun finding another way to sort items and I would love to more.
+// I am wondering: What are other things that are good with heaps other than priority queues?
 
 package PriorityQueue;
 
@@ -98,3 +100,16 @@ public class Pd2RonnieMohapatraHeapSortLab
         return array[current] > array[2 * current] && (2 * current + 1 <= size ? array[current] > array[2 * current + 1] : true);
     }
 }
+ /* Output
+
+99.0    80.0    85.0    17.0    30.0    84.0    2.0    16.0    1.0    
+
+1.0    2.0    16.0    17.0    30.0    80.0    84.0    85.0    99.0    
+
+Generated random list:    89.02    37.32    2.42    91.21    60.37    17.48    94.92    83.74    12.37    78.57    
+
+Made into a max heap:    94.92    91.21    89.02    83.74    78.57    17.48    2.42    37.32    12.37    60.37    
+
+Sorted:    2.42    12.37    17.48    37.32    60.37    78.57    83.74    89.02    91.21    94.92  
+
+*/
