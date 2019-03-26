@@ -2,6 +2,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - Pd2RonnieMoahpatraActingSchoolLab",
+            "request": "launch",
+            "mainClass": "Map.Pd2RonnieMoahpatraActingSchoolLab",
+            "projectName": "AdvancedCS"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Pd2RonnieMohapatraHashingLab",
+            "request": "launch",
+            "mainClass": "Hash.Pd2RonnieMohapatraHashingLab",
+            "projectName": "AdvancedCS"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - Pd2RonnieMohapatraHeapPriorityQueueLab",
             "request": "launch",
             "mainClass": "PriorityQueue.Pd2RonnieMohapatraHeapPriorityQueueLab",
