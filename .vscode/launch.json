@@ -2,6 +2,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - Pd2RonnieMohapatraDictionaryLab",
+            "request": "launch",
+            "mainClass": "Map.Pd2RonnieMohapatraDictionaryLab",
+            "projectName": "AdvancedCS"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Pd2RonnieMohapatraSetsOfLetters",
+            "request": "launch",
+            "mainClass": "Hash.Pd2RonnieMohapatraSetsOfLetters",
+            "projectName": "AdvancedCS"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - Pd2RonnieMoahpatraActingSchoolLab",
             "request": "launch",
             "mainClass": "Map.Pd2RonnieMoahpatraActingSchoolLab",
