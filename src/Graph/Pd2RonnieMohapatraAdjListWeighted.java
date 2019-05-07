@@ -1,6 +1,6 @@
 package Graph;
 
-//name:   date: 
+//name: Ronnie Mohapatra  date: 
 //resource classes for Graphs6: Dijkstra
 //                   Graphs7: Dijkstra with Cities
 
@@ -14,6 +14,10 @@ class Edge {
 	public Edge(wVertex argTarget, double argWeight) {
 		target = argTarget;
 		weight = argWeight;
+	}
+	
+	public String toString() {
+		return "to " + target + ": " + weight;
 	}
 }
 
@@ -68,7 +72,11 @@ class wVertex implements Comparable<wVertex>, wVertexInterface {
 	public void setMinDistance(double m) {
 		this.minDistance = m;
 	}
-
+	
+	public void setPrevious(wVertex v) {
+		previous = v;
+	}
+	
 	public ArrayList<Edge> getAdjacencies() {
 		return this.adjacencies;
 	}
@@ -133,12 +141,38 @@ interface AdjListWeightedInterfaceWithCities {
 			throws FileNotFoundException;
 }
 
-public class Pd2RonnieMohapatraAdjListWeighted implements AdjListWeightedInterface// ,
-																					// AdjListWeightedInterfaceWithCities
+public class Pd2RonnieMohapatraAdjListWeighted implements AdjListWeightedInterface, AdjListWeightedInterfaceWithCities														
 {
 	private List<wVertex> vertices = new ArrayList<wVertex>();
 	private Map<String, Integer> nameToIndex = new HashMap<String, Integer>();
 
+	public Pd2RonnieMohapatraAdjListWeighted graphFromEdgeListData(File vertexNames, File edgeListData) throws FileNotFoundException {
+		BufferedReader br1 = new BufferedReader(new FileReader(vertexNames));
+		try {
+			int size = Integer.parseInt(br1.readLine());
+			for(int i = 0; i < size; i++) {
+				addVertex(br1.readLine());
+			}
+		} catch(Exception e) {
+			e.getStackTrace();
+		}
+		BufferedReader br2 = new BufferedReader(new FileReader(edgeListData));
+		try {
+			while(br2.ready()) {
+				String line = br2.readLine();
+				String source = line.substring(0, line.indexOf(' '));
+				String target = line.substring(line.indexOf(' ') + 1, line.lastIndexOf(' '));
+				int weight = Integer.parseInt(line.substring(line.lastIndexOf(' ') + 1));
+				addEdge(source, target, weight);
+			}
+			br2.close();
+		} catch(Exception e) {
+			System.out.println("error while reading weights");
+			e.getStackTrace();
+		}
+		return this;
+	}
+	
 	public List<wVertex> getVertices() {
 		return vertices;
 	}
@@ -152,18 +186,7 @@ public class Pd2RonnieMohapatraAdjListWeighted implements AdjListWeightedInterfa
 	}
 
 	public wVertex getVertex(int i) {
-		String vertexName = "";
-		for (String key : nameToIndex.keySet()) {
-			if (nameToIndex.get(key) == i)
-				vertexName = key;
-		}
-
-		for (wVertex v : vertices) {
-			if (v.getName().equals(vertexName))
-				return v;
-		}
-
-		return null;
+		return vertices.get(i);
 	}
 
 	public void addVertex(String v) {
@@ -178,18 +201,19 @@ public class Pd2RonnieMohapatraAdjListWeighted implements AdjListWeightedInterfa
 	public void minimumWeightPath(String sourceVertexName) {
 		wVertex source = getVertex(sourceVertexName); // get source vertex
 		source.setMinDistance(0.0); // set its minimum distance to 0
+		System.out.println(source.getMinDistance());
 		ArrayList<wVertex> unsettled = new ArrayList<wVertex>(vertices); //using an ArrayList for the unchecked instead of PriorityQueue because the PriorityQueue did not work
-		//PriorityQueue<wVertex> pq = new PriorityQueue<wVertex>(vertices);
-		
-		//while(!pq.isEmpty()) {
+		putMinAtHead(unsettled);
 		while (!unsettled.isEmpty()) { //loop until all vertices have been checked
-			//wVertex current = pq.remove();
 			wVertex current = unsettled.remove(0); //unsettled used as a PriorityQueue where vertex with least minimum distance is at the head
-			for (Edge e : current.getAdjacencies())
-				//if(pq.contains(e.target))
-				if (unsettled.contains(e.target))
-					if (current.getMinDistance() + e.weight < e.target.getMinDistance())
+			for (Edge e : current.getAdjacencies()) {
+				if (unsettled.contains(e.target)) {
+					if (current.getMinDistance() + e.weight < e.target.getMinDistance()) {
 						e.target.setMinDistance(current.getMinDistance() + e.weight); //loop through all neighbors of currents and update the minimum distance if the distance from current to neighbor is less than the neighbor's minimum distance from source
+						e.target.setPrevious(current);
+					}
+				}
+			}
 			putMinAtHead(unsettled); //put the vertex with the least minimum distance at the head of the unchecked list
 		}
 	}
@@ -206,5 +230,18 @@ public class Pd2RonnieMohapatraAdjListWeighted implements AdjListWeightedInterfa
 			vertexList.set(0, vertexList.get(minInd));
 			vertexList.set(minInd, temp);
 		}
+	}
+	
+	public List<wVertex> getShortestPathTo(wVertex v) {
+		List<wVertex> path = new ArrayList<wVertex>();
+			if(v.getMinDistance() != Double.POSITIVE_INFINITY) {
+			wVertex current = v;
+			while(current.getMinDistance() != 0) {
+				path.add(0, current);
+				current = current.getPrevious();
+			}
+			path.add(0, current);
+		}
+		return path;
 	}
 }

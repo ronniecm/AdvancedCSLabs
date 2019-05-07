@@ -27,6 +27,7 @@ public class Pd2RonnieMohapatraDijkstra_6_Driver {
 		graph.minimumWeightPath(source); // runs Dijkstra's Algorithm
 		for (wVertex v : graph.getVertices()) {
 			System.out.println("Distance to " + v + ": " + v.getMinDistance());
+			System.out.println(graph.getShortestPathTo(v));
 		}
 	}
 }
